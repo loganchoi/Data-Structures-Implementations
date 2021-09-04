@@ -1,0 +1,107 @@
+
+*** Modified files in JOE when it aborted on Wed Nov  4 20:50:18 2020
+*** JOE was aborted by signal 1
+
+*** File 'MyMap.hpp'
+/* Define all your MyMap-related functions here, including the get_identity
+    function
+ * You do not need to include MyMap.h in this hpp header file. It includes
+    this file at the bottom.
+ */
+
+
+void get_identity(std::string &my_id)
+{
+  my_id = "lcmdk";
+  return;
+}
+
+
+//default constructro
+MyMap::MyMap()
+{
+   //Default should just be nothing
+   root = nullptr;
+}
+
+//destructor
+MyMap::~MyMap()
+{
+
+
+
+}
+
+MyMap::MyMap(const MyMap<K, V> &source)
+{
+
+
+}
+
+V & MyMap::at(const K &key)
+{
+
+
+}
+
+V & MyMap::operator[](const K &key)
+{
+
+
+}
+
+bool MyMap::empty()
+{
+
+}
+
+int MyMap::size()
+{
+
+}
+
+void MyMap::clear()
+{
+
+}
+
+void MyMap::insert(const MyPair<K, V> &init_pair)
+{
+
+}
+
+void MyMap::erase(const K &key)
+{
+
+}
+
+MyPair<K,V> * MyMap::find(const K &key) const
+{
+
+
+}
+
+
+void MyMap::print() const
+{
+
+}
+
+int MyMap::count(const K &key) const
+{
+
+
+}
+
+void get_letter_frequency(MyMap<char, int> &in_tree)
+{
+
+}
+*** Modified files in JOE when it aborted on Mon Nov  9 16:33:31 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Mon Nov  9 18:34:56 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Mon Nov  9 18:34:56 2020
+*** JOE was aborted by signal 1

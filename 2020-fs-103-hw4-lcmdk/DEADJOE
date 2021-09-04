@@ -1,0 +1,621 @@
+
+*** Modified files in JOE when it aborted on Fri Oct  9 13:47:52 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Fri Oct  9 13:47:52 2020
+*** JOE was aborted by signal 1
+
+*** File 'MyVector.hpp'
+/* Define all your MyVector-related functions here, including the swap and the
+    get_identity functions.
+ * You do not need to include MyVector.h in this hpp header file. It includes
+    this file at the bottom.
+ */
+
+
+void get_identity(string &my_id)
+{
+  my_id = "lcmdk"
+  return;
+}
+
+template <typename T>
+void MySwap (T &a, T &b)
+{
+  T temp;
+  temp = a;
+  a = b;
+  b = temp;
+  return;
+}
+
+
+// We're giving you this one for freenand as a guide for the syntax.
+template <typename T>
+MyVector<T>::~MyVector()
+{
+    delete[] m_data;
+}
+
+// Another example: remember when writing an implementation in hpp,
+// return type first, then scope just before the function name.
+template <typename T>
+T & MyVector<T>::at(int index)
+{
+    //Define the function here.
+}
+
+template <typename T>
+T & MyVector<T>::front()
+{
+    //Define the function here.
+}
+
+template <typename T>
+T & MyVector<T>::back()
+{
+    //Define the function here.
+}
+
+template <typename T>
+int MyVector<T>::capacity()
+{
+  return reserved_size;
+}
+
+template <typename T>
+int MyVector<T>::size()
+{
+  return data_size;
+}
+*** Modified files in JOE when it aborted on Fri Oct  9 16:40:46 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Sat Oct 10 00:27:46 2020
+*** JOE was aborted by signal 1
+
+*** File 'MyVector.hpp'
+/* Define all your MyVector-related functions here, including the swap and the
+    get_identity functions.
+ * You do not need to include MyVector.h in this hpp header file. It includes
+    this file at the bottom.
+ */
+
+void get_identity(string &my_id)
+{
+  my_id = "lcmdk";
+  return;
+}
+
+template <typename T>
+void MySwap(T &a, T &b)
+{
+  T temp;
+  temp = a;
+  a = b;
+  b = temp;
+  return;
+}
+
+MyVector<T>::MyVector()
+{
+  //Default constructor
+  m_data = new T[0];
+  reserved_size = 0;
+  data_size = 0;
+}
+
+// We're giving you this one for freenand as a guide for the syntax.
+template <typename T>
+MyVector<T>::~MyVector()
+{
+    delete[] m_data;
+}
+
+template <typename T>
+MyVector<T> & MyVector<T>::operator=(const MyVector<T> &source)
+{
+  data_size = source.data_size;
+  reserved_size = source.reserved_size;
+  m_data = new T [reserved_size];
+  for (int i = 0; i < data_size; i++)
+     m_data[i] = source.m_data[i];
+  
+  return (*this)
+}
+
+template <typename T>
+MyVector<T>::MyVector(const MyVector<T> &source))
+{
+  data_size = source.data_size;
+  reserved_size = source.reserved_size;
+  m_data = new T [reserved_size];
+  for (int i = 0; i < data_size; i++)
+     m_data[i] = source.m_data[i];
+
+}
+
+template <typename T>
+T & MyVector<T>::operator[](int i)
+{
+  return m_data[i];
+}
+
+// Another example: remember when writing an implementation in hpp,
+// return type first, then scope just before the function name.
+template <typename T>
+T & MyVector<T>::at(int index)
+{  
+  if (index < 0 || index > data_size)
+     throw std::out_of_range;
+  return m_data[index];
+}
+
+template <typename T>
+T & MyVector<T>::front()
+{
+  return m_data[0];
+}  
+
+template <typename T>
+T & MyVector<T>::back()
+{
+  return m_data[data_size-1];
+}
+
+template<typename T>
+int MyVector<T>::capacity()
+{
+  return reserved_size;
+}
+
+//Finish below
+template<typename T>
+void MyVector<T>::reserve(int new_cap)
+{
+  reserved_size = new_cap;
+  return;  
+}
+
+template<typename T>
+void MyVector<T>::shrink_to_fit()
+{
+  reserved_size = data_size * 2;
+  return;  
+}
+
+template<typename T>
+void MyVector<T>::assign(int count, const T &value)
+{
+  delete []m_data;
+  data_size = count;
+  
+  if (data_size >= reserved_size)
+     reserve(data_size*2);
+  
+  m_data = new T [reserved_size];
+  
+  for (int i = 0; i<count;i++)
+     m_data[i] = value;
+  return;
+}
+
+
+void MyVector<T>::clear()
+{
+  data_size = 0;
+  reserved_size = 0;
+  delete [] m_data;
+  m_data = nullptr;
+  return;
+}
+
+void MyVector<T>::push_back(const T &x)
+{
+  data_size +=1;
+  if (data_size >= reserved_size)
+     reserve(data_size * 2);
+
+  m_data[data_size-1] = x;
+  return;
+}
+
+void MyVector<T>::pop_back()
+{
+  data_size -= 1;
+
+  if (reserved_size/4 > data_size)
+     shrink_to_fit();
+
+  return;
+}
+
+void MyVector<T>::insert(int i, const T &x)
+{
+  data_size +=1;
+  if (data_size >= reserved_size)
+      reserve(data_size * 2);
+
+  for (i; i < data_size+1; i++)
+      MySwap(m_data[i+1],m_data[i])
+  m_data[i] = x;
+  return;
+}
+
+void MyVector<T>::erase(int i);
+{
+  data_size-=1;
+  
+  if (reserved_size/4 > data_size)
+      shrink_to_fit();
+  
+  for (i; i < data_size; i++)
+      MySwap(m_data[i],m_data[i+1]);
+  
+  return;
+}
+
+int MyVector<T>::size()
+{
+  return data_size;
+}
+
+
+*** Modified files in JOE when it aborted on Sun Oct 11 12:27:52 2020
+*** JOE was aborted by signal 1
+
+*** File 'MyVector.hpp'
+/* Define all your MyVector-related functions here, including the swap and the
+    get_identity functions.
+ * You do not need to include MyVector.h in this hpp header file. It includes
+    this file at the bottom.
+ */
+
+void get_identity(string &my_id)
+{
+  my_id = "lcmdk";
+  return;
+}
+
+template <typename T>
+void MySwap(T &a, T &b)
+{
+  T temp;
+  temp = a;
+  a = b;
+  b = temp;
+  return;
+}
+
+MyVector<T>::MyVector()
+{
+  //Default constructor
+  m_data = new T[0];
+  reserved_size = 0;
+  data_size = 0;
+}
+
+// We're giving you this one for freenand as a guide for the syntax.
+template <typename T>
+MyVector<T>::~MyVector()
+{
+    delete[] m_data;
+}
+
+template <typename T>
+MyVector<T> & MyVector<T>::operator=(const MyVector<T> &source)
+{
+  data_size = source.data_size;
+  reserved_size = source.reserved_size;
+  m_data = new T [reserved_size];
+  for (int i = 0; i < data_size; i++)
+     m_data[i] = source.m_data[i];
+  
+  return (*this)
+}
+
+template <typename T>
+MyVector<T>::MyVector(const MyVector<T> &source))
+{
+  data_size = source.data_size;
+  reserved_size = source.reserved_size;
+  m_data = new T [reserved_size];
+  for (int i = 0; i < data_size; i++)
+     m_data[i] = source.m_data[i];
+
+}
+
+template <typename T>
+T & MyVector<T>::operator[](int i)
+{
+  return m_data[i];
+}
+
+// Another example: remember when writing an implementation in hpp,
+// return type first, then scope just before the function name.
+template <typename T>
+T & MyVector<T>::at(int index)
+{  
+  if (index < 0 || index > data_size)
+     throw std::out_of_range;
+  return m_data[index];
+}
+
+template <typename T>
+T & MyVector<T>::front()
+{
+  return m_data[0];
+}  
+
+template <typename T>
+T & MyVector<T>::back()
+{
+  return m_data[data_size-1];
+}
+
+int MyVector<T>::capacity()
+{
+  return reserved_size;
+}
+
+//Finish below
+void MyVector<T>::reserve(int new_cap)
+{
+  reserved_size = new_cap;
+  MyVector temp;
+  temp.reserved_size = reserved_size;
+  temp.m_data = T new [reserved_size];
+  temp.data_size = data_size;
+  
+  for (int i = 0; i< data_size; i++)
+      temp.m_data[i] = m_data[i];
+  delete [] m_data;
+  
+  m_data = new T [reserved_size];
+   
+
+  return;  
+}
+
+void MyVector<T>::shrink_to_fit()
+{
+  reserved_size = data_size  * 2;
+  return;  
+}
+
+void MyVector<T>::assign(int count, const T &value)
+{
+  delete []m_data;
+  data_size = count;
+  
+  if (data_size >= reserved_size)
+     reserve(data_size*2);
+  
+  m_data = new T [reserved_size];
+  
+  for (int i = 0; i<count;i++)
+     m_data[i] = value;
+  return;
+}
+
+void MyVector<T>::clear()
+{
+  data_size = 0;
+  reserved_size = 0;
+  delete [] m_data;
+  m_data = nullptr;
+  return;
+}
+
+void MyVector<T>::push_back(const T &x)
+{
+  data_size +=1;
+  if (data_size >= reserved_size)
+     reserve(data_size * 2);
+
+  m_data[data_size-1] = x;
+  return;
+}
+
+void MyVector<T>::pop_back()
+{
+  data_size -= 1;
+
+  if (reserved_size/4 > data_size)
+     shrink_to_fit();
+
+  return;
+}
+
+void MyVector<T>::insert(int i, const T &x)
+{
+  data_size +=1;
+  if (data_size >= reserved_size)
+      reserve(data_size * 2);
+
+  for (i; i < data_size+1; i++)
+      MySwap(m_data[i+1],m_data[i])
+  m_data[i] = x;
+  return;
+}
+
+void MyVector<T>::erase(int i);
+{
+  data_size-=1;
+  
+  if (reserved_size/4 > data_size)
+      shrink_to_fit();
+  
+  for (i; i < data_size; i++)
+      MySwap(m_data[i],m_data[i+1]);
+  
+  return;
+}
+
+int MyVector<T>::size()
+{
+  return data_size;
+}
+
+
+*** Modified files in JOE when it aborted on Sun Oct 11 21:27:47 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Mon Oct 12 17:30:15 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Tue Oct 13 12:02:06 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Tue Oct 13 17:12:47 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Tue Oct 13 18:32:22 2020
+*** JOE was aborted by signal 1
+
+*** File 'pa04.cpp'
+/* Sample main (this file is not a unit test!)
+
+ * This file is for developing your own tests to make sure that your code is
+    runnable for different use cases.
+
+ * std::vector is included in the code below to show you how your types should
+    behave. Feel free to use that for debugging purposes.
+
+
+ * Make sure to test your vector with multiple types!!
+
+ * In the main function (or multiple mains) you should write your own
+    "unit tests" for each function; one suggestion may be one main per function.
+    Multiple Main Methods: http://www.cplusplus.com/forum/beginner/46664/
+*/
+
+// USE THIS TO TEST, BUT REMOVE LATER TO VALIDATE YOUR OWN IMPLEMENTAION
+//#include <vector>
+//#include <iostream>
+//using namespace std;
+
+// Uncomment this to test with your own list implementation
+#include "MyVector.h"
+
+int main()
+{
+    // Uncomment this to test with your own list implementation
+    MyVector<int> v;
+    //std::vector<int> v;
+
+    cout << v.size() << endl;
+    v.push_back(4000);
+    v.pop_back();
+    cout << v.capacity() << endl;
+    v.reserve(10);
+    cout << v.capacity() << endl;
+    v.push_back(30);
+    v.push_back(20);
+    v.insert(v.begin(), 10);
+    v.insert(v.end(), 60);
+    v.pop_back();
+    v.assign(20,2);
+    v.insert(3,4);
+    MyVector<int> g = v;
+    v.insert(v.begin(),2);
+    v.push_back(3);
+    v.reserve(6);
+    cout << v.capacity()<<endl;
+    
+    // These below look like iterators, but are really just integers.
+    // We are not making you re-implement iterators themselves.
+
+    int j = 0;
+    for(auto i = 0; i < g.size(); i++)
+    {
+        cout << g[j] << endl;
+        j++;
+    }
+    j=0;
+    for(auto i = 0; i < v.size(); i++)
+    {
+        cout << v[j] << endl;
+        j++;
+    }
+    v.clear();
+    cout << v
+}
+
+*** Modified files in JOE when it aborted on Tue Oct 13 18:40:09 2020
+*** JOE was aborted by signal 1
+
+*** Modified files in JOE when it aborted on Wed Oct 14 22:14:11 2020
+*** JOE was aborted by signal 1
+
+*** File 'pa04.cpp'
+/* Sample main (this file is not a unit test!)
+
+ * This file is for developing your own tests to make sure that your code is
+    runnable for different use cases.
+
+ * std::vector is included in the code below to show you how your types should
+    behave. Feel free to use that for debugging purposes.
+
+
+ * Make sure to test your vector with multiple types!!
+
+ * In the main function (or multiple mains) you should write your own
+    "unit tests" for each function; one suggestion may be one main per function.
+    Multiple Main Methods: http://www.cplusplus.com/forum/beginner/46664/
+*/
+
+// USE THIS TO TEST, BUT REMOVE LATER TO VALIDATE YOUR OWN IMPLEMENTAION
+//#include <vector>
+//#include <iostream>
+//using namespace std;
+
+// Uncomment this to test with your own list implementation
+#include "MyVector.h"
+
+int main()
+{
+    // Uncomment this to test with your own list implementation
+    MyVector<int> v;
+    //std::vector<int> v;
+    v.shrink_to_fit();
+    v.reserve(1);
+    
+    MyVector<int> g;
+    v.pop_back();
+    v.erase(5);
+    v.assign(5,2);
+    v.erase(20);
+    cout << v.size() << endl;
+    v.push_back(4000);
+    cout << v.at(0) << endl;
+    cout << v.capacity() << endl;
+    v.reserve(10);
+    cout << v.capacity() << endl;
+    v.push_back(200);
+    v.push_back(100);
+    v.insert(v.begin(), 3);
+    v.insert(v.end(), 20);
+    MySwap(v,g);
+    
+    // These below look like iterators, but are really just integers.
+    // We are not making you re-implement iterators themselves.
+
+    int j = 0;
+
+    for(auto i = v.begin(); i < v.end(); i++)
+    {
+        cout << v.at(j) << endl;
+        j++;
+    }
+
+    j = 0;
+
+    for(auto i = 0; i < v.size(); i++)
+    {
+        cout << v[j] << endl;
+        j++;
+    }
+
+    return 0;
+}
